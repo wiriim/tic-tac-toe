@@ -50,3 +50,24 @@ let gameBoard = (function(){
     
     return {board, setCircle, setCross, setRandomCircle, setRandomCross, isGameOver};
 })();
+
+let crossContainer = document.querySelector(".cross-container");
+let circleContainer = document.querySelector(".circle-container");
+let player;
+
+crossContainer.addEventListener("click", ()=>{
+    crossContainer.dataset.active = "true";
+    circleContainer.dataset.active = "false";
+    crossContainer.style.backgroundColor = "var(--lightGrey)"
+    circleContainer.style.backgroundColor = "var(--lightBlue)"
+});
+
+circleContainer.addEventListener("click", ()=>{
+    circleContainer.dataset.active = "true";
+    crossContainer.dataset.active = "false";
+    circleContainer.style.backgroundColor = "var(--lightGrey)"
+    crossContainer.style.backgroundColor = "var(--lightBlue)"
+});
+
+crossContainer.dataset.active == "true" ? player = "X" : player = "O";
+console.log(player)
