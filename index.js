@@ -50,4 +50,3 @@ let gameBoard = (function(){
     
     return {board, setCircle, setCross, setRandomCircle, setRandomCross, isGameOver};
 })();
-
