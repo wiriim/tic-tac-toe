@@ -12,6 +12,15 @@
     box-sizing: border-box;
 }
 
+input{
+    appearance: none;
+    background-color: var(--lightBlue);
+    border: none;
+    text-align: center;
+    font-size: 2rem;
+    color:black;
+}
+
 .container{
     width: 100vw;
     height: 100vh;
@@ -50,8 +59,14 @@
 
 .board-container{
     height: 100%;
-    padding: 3rem;
+    padding: 1rem 3rem 3rem 3rem;
+    text-align: center;
 }
+
+.message{
+    font-size: 2rem;
+}
+
 
 .block-container{
     background-color: black;
@@ -75,5 +90,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-image: url(images/cross.png);
+    background-size: 80%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.circle{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-image: url(images/circle.png);
+    background-size: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
 }

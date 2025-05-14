@@ -73,6 +73,7 @@ let displayController = (function(){
         player = "X";
         gameBoard.resetBoard();
         drawBoard();
+        updateMessage("Tic Tac Toe");
     });
     
     circleContainer.addEventListener("click", ()=>{
@@ -84,6 +85,7 @@ let displayController = (function(){
         gameBoard.resetBoard();
         gameBoard.setRandomCross();
         drawBoard();
+        updateMessage("Tic Tac Toe");
     });
     
     let blocks = document.querySelectorAll(".block");
@@ -102,8 +104,9 @@ let displayController = (function(){
                 }
                 drawBoard();
             }
-            console.log(gameBoard.board)
-            console.log(gameBoard.isGameOver());
+            if (gameBoard.isGameOver() != false){
+                updateMessage(gameBoard.isGameOver());
+            }
         });
     });
     
@@ -124,6 +127,15 @@ let displayController = (function(){
                 }
             }
         }
+    }
+
+    function updateMessage(msg){
+        let message = document.querySelector(".message");
+        message.textContent = msg;
+        if (player == "X" & msg == "X Wins") message.style.color = "green";
+        else message.style.color = "red";
+
+        if (msg == "Tic Tac Toe") message.style.color = "black";
     }
     return {drawBoard}    
 })();

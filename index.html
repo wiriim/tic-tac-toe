@@ -10,12 +10,16 @@
 <body>
     <div class="container">
         <div class="left-container">
-            GUEST
+            <div class="name-container">
+                <input type="text" value="Guest" disabled>
+                <img src="images/square-edit-outline.svg" id="editBtn" alt="edit" width="20">
+            </div>
             <div class="cross-container" data-active="true">X</div>
             <div class="circle-container" data-active="false">O</div>
         </div>
         <div class="right-container">
             <div class="board-container">
+                <div class="message">Tic Tac Toe</div>
                 <div class="block-container">
                     <div class="block" data-row="0" data-col="0"></div>
                     <div class="block" data-row="0" data-col="1"></div>
