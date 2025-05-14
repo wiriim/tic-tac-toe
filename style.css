@@ -69,3 +69,11 @@
 .block:hover{
     background-color: var(--lightBlue);
 }
+
+.cross{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(images/circle.png);
+}
