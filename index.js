@@ -60,67 +60,71 @@ let gameBoard = (function(){
     return {board, setCircle, setCross, setRandomCircle, setRandomCross, resetBoard,isGameOver};
 })();
 
-let crossContainer = document.querySelector(".cross-container");
-let circleContainer = document.querySelector(".circle-container");
-let player = "X";
-
-crossContainer.addEventListener("click", ()=>{
-    crossContainer.dataset.active = "true";
-    circleContainer.dataset.active = "false";
-    crossContainer.style.backgroundColor = "var(--lightGrey)";
-    circleContainer.style.backgroundColor = "var(--lightBlue)";
-    player = "X";
-    gameBoard.resetBoard();
-    drawBoard();
-});
-
-circleContainer.addEventListener("click", ()=>{
-    circleContainer.dataset.active = "true";
-    crossContainer.dataset.active = "false";
-    circleContainer.style.backgroundColor = "var(--lightGrey)";
-    crossContainer.style.backgroundColor = "var(--lightBlue)";
-    player = "O";
-    gameBoard.resetBoard();
-    gameBoard.setRandomCross();
-    drawBoard();
-});
-
-let blocks = document.querySelectorAll(".block");
-
-blocks.forEach(block => {
-    block.addEventListener("click", e =>{
-        let msg = "";
-        if (gameBoard.isGameOver() == false){
-            if (player == "X"){
-                msg = gameBoard.setCross(e.target.dataset.row, e.target.dataset.col);
-                if (msg == "Cross Placed" && gameBoard.isGameOver() == false) gameBoard.setRandomCircle();
-            }
-            else if (player == "O"){
-                msg = gameBoard.setCircle(e.target.dataset.row, e.target.dataset.col);
-                if (msg == "Circle Placed" && gameBoard.isGameOver() == false) gameBoard.setRandomCross();
-            }
-            drawBoard();
-        }
-        console.log(gameBoard.board)
-        console.log(gameBoard.isGameOver());
+let displayController = (function(){
+    let crossContainer = document.querySelector(".cross-container");
+    let circleContainer = document.querySelector(".circle-container");
+    let player = "X";
+    
+    crossContainer.addEventListener("click", ()=>{
+        crossContainer.dataset.active = "true";
+        circleContainer.dataset.active = "false";
+        crossContainer.style.backgroundColor = "var(--lightGrey)";
+        circleContainer.style.backgroundColor = "var(--lightBlue)";
+        player = "X";
+        gameBoard.resetBoard();
+        drawBoard();
     });
-});
-
-function drawBoard(){
-    let block;
-    for (let i = 0; i < 3; i++){
-        for (let j = 0; j < 3; j++){
-            if (gameBoard.board[i][j] != null){
-                block = document.querySelector(`[data-row="${i}"][data-col="${j}"]`);
-                block.innerHTML = "";
-                let drawing = document.createElement("div");
-                gameBoard.board[i][j] == "X" ? drawing.classList.add("cross") : drawing.classList.add("circle");
-                block.appendChild(drawing);
+    
+    circleContainer.addEventListener("click", ()=>{
+        circleContainer.dataset.active = "true";
+        crossContainer.dataset.active = "false";
+        circleContainer.style.backgroundColor = "var(--lightGrey)";
+        crossContainer.style.backgroundColor = "var(--lightBlue)";
+        player = "O";
+        gameBoard.resetBoard();
+        gameBoard.setRandomCross();
+        drawBoard();
+    });
+    
+    let blocks = document.querySelectorAll(".block");
+    
+    blocks.forEach(block => {
+        block.addEventListener("click", e =>{
+            let msg = "";
+            if (gameBoard.isGameOver() == false){
+                if (player == "X"){
+                    msg = gameBoard.setCross(e.target.dataset.row, e.target.dataset.col);
+                    if (msg == "Cross Placed" && gameBoard.isGameOver() == false) gameBoard.setRandomCircle();
+                }
+                else if (player == "O"){
+                    msg = gameBoard.setCircle(e.target.dataset.row, e.target.dataset.col);
+                    if (msg == "Circle Placed" && gameBoard.isGameOver() == false) gameBoard.setRandomCross();
+                }
+                drawBoard();
             }
-            else{
-                block = document.querySelector(`[data-row="${i}"][data-col="${j}"]`);
-                if (block.firstChild) block.removeChild(block.firstChild);
+            console.log(gameBoard.board)
+            console.log(gameBoard.isGameOver());
+        });
+    });
+    
+    function drawBoard(){
+        let block;
+        for (let i = 0; i < 3; i++){
+            for (let j = 0; j < 3; j++){
+                if (gameBoard.board[i][j] != null){
+                    block = document.querySelector(`[data-row="${i}"][data-col="${j}"]`);
+                    block.innerHTML = "";
+                    let drawing = document.createElement("div");
+                    gameBoard.board[i][j] == "X" ? drawing.classList.add("cross") : drawing.classList.add("circle");
+                    block.appendChild(drawing);
+                }
+                else{
+                    block = document.querySelector(`[data-row="${i}"][data-col="${j}"]`);
+                    if (block.firstChild) block.removeChild(block.firstChild);
+                }
             }
         }
     }
-}
+    return {drawBoard}    
+})();
+
